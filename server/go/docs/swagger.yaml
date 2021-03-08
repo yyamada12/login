@@ -1,0 +1,48 @@
+basePath: /
+definitions:
+  controller.RegisterForm:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - password
+    type: object
+host: localhost:5000
+info:
+  contact: {}
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  title: login sample API
+  version: "1.0"
+paths:
+  /register:
+    post:
+      consumes:
+      - application/json
+      description: メールアドレスとパスワードを用いてユーザーを登録する
+      parameters:
+      - description: メールアドレス, パスワード
+        in: body
+        name: RegisterForm
+        required: true
+        schema:
+          $ref: '#/definitions/controller.RegisterForm'
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "400":
+          description: パラメータが不正
+          schema:
+            type: object
+        "500":
+          description: サーバー内エラー
+          schema:
+            type: object
+      summary: ユーザー登録API
+swagger: "2.0"

@@ -1,0 +1,24 @@
+version: "3"
+services:
+  go:
+    build:
+      context: .
+      dockerfile: ./go/Dockerfile
+    container_name: login-go
+    ports:
+      - 5000:5000
+    tty: true
+    volumes:
+      - ../server/go:/app/go
+  mysql:
+    image: mysql:8
+    container_name: login-mysql
+    ports:
+      - 3306:3306
+    volumes:
+      - ../server/db/mysql_init:/docker-entrypoint-initdb.d
+      - ../server/db/mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: logintest
+      MYSQL_PASSWORD: logintest
