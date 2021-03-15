@@ -28,6 +28,46 @@ var doc = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/login": {
+            "post": {
+                "description": "メールアドレスとパスワードを用いてログイン処理を行う",
+                "consumes": [
+                    "application/json"
+                ],
+                "summary": "ログインAPI",
+                "parameters": [
+                    {
+                        "description": "メールアドレス, パスワード",
+                        "name": "LoginForm",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controller.LoginForm"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "400": {
+                        "description": "パラメータが不正",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "500": {
+                        "description": "サーバー内エラー",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "/register": {
             "post": {
                 "description": "メールアドレスとパスワードを用いてユーザーを登録する",
@@ -70,6 +110,21 @@ var doc = `{
         }
     },
     "definitions": {
+        "controller.LoginForm": {
+            "type": "object",
+            "required": [
+                "email",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
         "controller.RegisterForm": {
             "type": "object",
             "required": [

@@ -1,5 +1,15 @@
 basePath: /
 definitions:
+  controller.LoginForm:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - password
+    type: object
   controller.RegisterForm:
     properties:
       email:
@@ -19,6 +29,32 @@ info:
   title: login sample API
   version: "1.0"
 paths:
+  /login:
+    post:
+      consumes:
+      - application/json
+      description: メールアドレスとパスワードを用いてログイン処理を行う
+      parameters:
+      - description: メールアドレス, パスワード
+        in: body
+        name: LoginForm
+        required: true
+        schema:
+          $ref: '#/definitions/controller.LoginForm'
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "400":
+          description: パラメータが不正
+          schema:
+            type: object
+        "500":
+          description: サーバー内エラー
+          schema:
+            type: object
+      summary: ログインAPI
   /register:
     post:
       consumes:
