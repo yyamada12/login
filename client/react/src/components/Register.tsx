@@ -1,40 +1,67 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
+
+import axios from 'axios'
+import 'external/axios_settings'
 
 const Register: React.FC = () => {
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [msg, setMsg] = useState('msg')
 
-    return (
-      <React.Fragment>
-          <form>
-            <p>
-              <b>ユーザー登録</b>
-            </p>
+  const onClick = () => {
+    axios
+      .post('/register', {
+        email: email,
+        password: password,
+      })
+      .then(() => {
+        // TODO: ログイン画面へリダイレクト
+      })
+      .catch((err) => {
+        if (err.response) {
+          setMsg(err.response.data.msg)
+        }
+      })
+  }
 
-              <label>メールアドレス: </label>
-              <input
-                type="email"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-                value={email}
-              />
+  return (
+    <React.Fragment>
+      <form>
+        <p>
+          <b>ユーザー登録</b>
+        </p>
 
-              <br/>
+        <label>メールアドレス: </label>
+        <input
+          type="email"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setEmail(e.target.value)
+          }
+          value={email}
+        />
 
-              <label>パスワード: </label>
-              <input
-                type="password"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
-                value={password}
-              />
+        <br />
 
-              <br/>
+        <label>パスワード: </label>
+        <input
+          type="password"
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setPassword(e.target.value)
+          }
+          value={password}
+        />
 
-            <button type="button">
-              ログイン
-            </button>
-          </form>
-        </React.Fragment>
-    );
+        <br />
+
+        <button type="button" onClick={onClick}>
+          登録
+        </button>
+
+        <br />
+        <p>{msg}</p>
+      </form>
+    </React.Fragment>
+  )
 }
 
 export default Register

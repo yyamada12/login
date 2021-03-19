@@ -1,9 +1,7 @@
-import Register from "components/Register";
+import Register from 'components/Register'
 
 function App() {
-  return (
-    <Register/>
-  );
+  return <Register />
 }
 
-export default App;
+export default App
