@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
 
 import axios from 'axios'
 import 'external/axios_settings'
@@ -7,6 +8,8 @@ const Register: React.FC = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [msg, setMsg] = useState('msg')
+
+  const { register, handleSubmit, errors } = useForm()
 
   const onClick = () => {
     axios
@@ -26,7 +29,7 @@ const Register: React.FC = () => {
 
   return (
     <React.Fragment>
-      <form>
+      <form onSubmit={handleSubmit(onClick)}>
         <p>
           <b>ユーザー登録</b>
         </p>
@@ -34,28 +37,39 @@ const Register: React.FC = () => {
         <label>メールアドレス: </label>
         <input
           type="email"
+          name="email"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setEmail(e.target.value)
           }
           value={email}
+          ref={register({
+            required: 'メールアドレスを入力してください',
+          })}
         />
+        {errors.email && errors.email.message}
 
         <br />
 
         <label>パスワード: </label>
         <input
           type="password"
+          name="password"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setPassword(e.target.value)
           }
           value={password}
+          ref={register({
+            required: 'パスワードを入力してください',
+            min: {
+              value: 8,
+              message: '8文字以上のパスワードを設定してください',
+            },
+          })}
         />
 
         <br />
 
-        <button type="button" onClick={onClick}>
-          登録
-        </button>
+        <button type="submit">登録</button>
 
         <br />
         <p>{msg}</p>
