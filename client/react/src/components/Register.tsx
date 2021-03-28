@@ -3,11 +3,14 @@ import { useForm } from 'react-hook-form'
 
 import axios from 'axios'
 import 'external/axios_settings'
+import { useHistory } from 'react-router'
 
 const Register: React.FC = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [msg, setMsg] = useState('msg')
+
+  const history = useHistory();
 
   const { register, handleSubmit, errors } = useForm()
 
@@ -18,7 +21,7 @@ const Register: React.FC = () => {
         password: password,
       })
       .then(() => {
-        // TODO: ログイン画面へリダイレクト
+        history.push('/login')
       })
       .catch((err) => {
         if (err.response) {
