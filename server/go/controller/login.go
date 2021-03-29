@@ -23,7 +23,7 @@ type LoginForm struct {
 // @version 1.0
 // @accept json
 // @param LoginForm body LoginForm true "メールアドレス, パスワード"
-// @Success 200 {object} object "OK"
+// @Success 200 {object} object "OK, userId"
 // @Failure 400 {object} object "パラメータが不正"
 // @Failure 500 {object} object "サーバー内エラー"
 // @router /login [post]
@@ -104,6 +104,7 @@ func Login(c *gin.Context) {
 	sess.Save()
 
 	c.JSON(http.StatusOK, gin.H{
-		"msg": "OK",
+		"msg":    "OK",
+		"userId": user.Id,
 	})
 }

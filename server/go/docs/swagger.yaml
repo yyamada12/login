@@ -43,7 +43,7 @@ paths:
           $ref: '#/definitions/controller.LoginForm'
       responses:
         "200":
-          description: OK
+          description: OK, userId
           schema:
             type: object
         "400":

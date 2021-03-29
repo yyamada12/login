@@ -48,7 +48,7 @@ var doc = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
+                        "description": "OK, userId",
                         "schema": {
                             "type": "object"
                         }
