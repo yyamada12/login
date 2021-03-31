@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useHistory } from 'react-router'
 
 import axios from 'axios'
 import 'external/axios_settings'
-import { useHistory } from 'react-router'
 
 const Register: React.FC = () => {
   const [email, setEmail] = useState('')

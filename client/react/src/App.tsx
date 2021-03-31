@@ -1,5 +1,9 @@
+import Auth from 'components/Auth'
 import Register from 'components/Register'
 import Login from 'components/Login'
+import Top from 'components/Top'
+
+import { UserStore } from 'contexts/UserStore';
 
 import {
   BrowserRouter as Router,
@@ -9,16 +13,19 @@ import {
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route path="/register">
-          <Register />
-        </Route>
-        <Route path="/login">
-          <Login />
-        </Route>
-      </Switch>
-    </Router>
+    <UserStore>
+      <Router>
+        <Switch>
+          <Route path="/register" component={Register} />
+          <Route path="/login" component={Login} />
+          <Auth>
+            <Switch>
+              <Route path="/top" component={Top}/>
+            </Switch>
+          </Auth>
+        </Switch>
+      </Router>
+    </UserStore>
   )
 }
 
