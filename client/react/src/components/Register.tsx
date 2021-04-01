@@ -10,7 +10,7 @@ const Register: React.FC = () => {
   const [password, setPassword] = useState('')
   const [msg, setMsg] = useState('msg')
 
-  const history = useHistory();
+  const history = useHistory()
 
   const { register, handleSubmit, errors } = useForm()
 

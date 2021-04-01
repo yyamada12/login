@@ -1,16 +1,15 @@
 import React from 'react'
 
-import {useUserContext} from 'contexts/UserStore'
+import { useUserContext } from 'contexts/UserStore'
 
 const Top: React.FC = () => {
-  const {userId} = useUserContext();
+  const { userId } = useUserContext()
 
   return (
     <React.Fragment>
-          <h1>Top</h1> 
-          <br/>
-          userId: {userId}
-
+      <h1>Top</h1>
+      <br />
+      userId: {userId}
     </React.Fragment>
   )
 }

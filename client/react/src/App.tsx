@@ -3,13 +3,9 @@ import Register from 'components/Register'
 import Login from 'components/Login'
 import Top from 'components/Top'
 
-import { UserStore } from 'contexts/UserStore';
+import { UserStore } from 'contexts/UserStore'
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 function App() {
   return (
@@ -20,7 +16,7 @@ function App() {
           <Route path="/login" component={Login} />
           <Auth>
             <Switch>
-              <Route path="/top" component={Top}/>
+              <Route path="/top" component={Top} />
             </Switch>
           </Auth>
         </Switch>
