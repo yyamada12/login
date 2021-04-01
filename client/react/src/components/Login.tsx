@@ -1,15 +1,24 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useHistory } from 'react-router'
 
 import axios from 'axios'
 import 'external/axios_settings'
 
+import 'style/login.css'
+
+import { useSetUserContext } from 'contexts/UserStore'
+
 const Login: React.FC = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [msg, setMsg] = useState('msg')
+  const [msg, setMsg] = useState('パスワードは必須です')
+
+  const history = useHistory()
 
   const { register, handleSubmit, errors } = useForm()
+
+  const { setUserId } = useSetUserContext()
 
   const onClick = () => {
     axios
@@ -17,8 +26,10 @@ const Login: React.FC = () => {
         email: email,
         password: password,
       })
-      .then(() => {
-        // TODO: トップ画面へリダイレクト
+      .then((res) => {
+        setMsg(res.data.userId)
+        setUserId(res.data.userId)
+        history.push('/top')
       })
       .catch((err) => {
         if (err.response) {
@@ -29,47 +40,44 @@ const Login: React.FC = () => {
 
   return (
     <React.Fragment>
-      <form onSubmit={handleSubmit(onClick)}>
-        <p>
-          <b>ログイン</b>
-        </p>
+      <div className="loginMain">
+        <h1 className="login">ログイン</h1>
 
-        <label>メールアドレス: </label>
-        <input
-          type="email"
-          name="email"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setEmail(e.target.value)
-          }
-          value={email}
-          ref={register({
-            required: 'メールアドレスを入力してください',
-          })}
-        />
-        {errors.email && errors.email.message}
+        <form className="loginForm" onSubmit={handleSubmit(onClick)}>
+          <input
+            type="email"
+            name="email"
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setEmail(e.target.value)
+            }
+            value={email}
+            placeholder="メールアドレスを入力"
+            ref={register({
+              required: 'メールアドレスを入力してください',
+            })}
+          />
+          {errors.email && errors.email.message}
 
-        <br />
+          <input
+            type="password"
+            name="password"
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setPassword(e.target.value)
+            }
+            value={password}
+            placeholder="パスワードを入力"
+            ref={register({
+              required: 'パスワードを入力してください',
+            })}
+          />
 
-        <label>パスワード: </label>
-        <input
-          type="password"
-          name="password"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setPassword(e.target.value)
-          }
-          value={password}
-          ref={register({
-            required: 'パスワードを入力してください',
-          })}
-        />
+          <button className="loginSubmit" type="submit">
+            ログイン
+          </button>
 
-        <br />
-
-        <button type="submit">ログイン</button>
-
-        <br />
-        <p>{msg}</p>
-      </form>
+          <p className="loginMsg">{msg}</p>
+        </form>
+      </div>
     </React.Fragment>
   )
 }
