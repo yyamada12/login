@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useHistory } from 'react-router'
+import { Link } from 'react-router-dom'
 
 import axios from 'axios'
 import 'external/axios_settings'
@@ -12,7 +13,7 @@ import { useSetUserContext } from 'contexts/UserStore'
 const Login: React.FC = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [msg, setMsg] = useState('パスワードは必須です')
+  const [msg, setMsg] = useState('')
 
   const history = useHistory()
 
@@ -56,7 +57,7 @@ const Login: React.FC = () => {
               required: 'メールアドレスを入力してください',
             })}
           />
-          {errors.email && errors.email.message}
+          <p className="loginMsg">{errors.email && errors.email.message}</p>
 
           <input
             type="password"
@@ -70,12 +71,20 @@ const Login: React.FC = () => {
               required: 'パスワードを入力してください',
             })}
           />
+          <p className="loginMsg">
+            {errors.password && errors.password.message}
+          </p>
 
           <button className="loginSubmit" type="submit">
             ログイン
           </button>
 
           <p className="loginMsg">{msg}</p>
+
+          <hr className="loginSeparator" />
+          <Link className="loginToRegister" to="/register">
+            <p>ユーザー登録はこちら</p>
+          </Link>
         </form>
       </div>
     </React.Fragment>
