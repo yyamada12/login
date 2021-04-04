@@ -6,6 +6,7 @@ import axios from 'axios'
 import 'external/axios_settings'
 
 import 'style/register.css'
+import { Link } from 'react-router-dom'
 
 const Register: React.FC = () => {
   const [email, setEmail] = useState('')
@@ -49,7 +50,9 @@ const Register: React.FC = () => {
               required: 'メールアドレスを入力してください',
             })}
           />
-          {errors.email && errors.email.message}
+          <p className="registerMsg">
+            {errors.email && errors.email.message}
+          </p>
 
           <input
             type="password"
@@ -68,11 +71,20 @@ const Register: React.FC = () => {
             })}
           />
 
+          <p className="registerMsg">
+            {errors.password && errors.password.message}
+          </p>
+
           <button className="registerSubmit" type="submit">
             登録
           </button>
 
           <p className="registerMsg">{msg}</p>
+
+          <hr className="registerSeparator" />
+          <Link className="registerToLogin" to="/login">
+            <p>ログイン画面はこちら</p>
+          </Link>
         </form>
       </div>
     </React.Fragment>
