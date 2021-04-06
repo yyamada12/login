@@ -21,3 +21,11 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: logintest
       MYSQL_PASSWORD: logintest
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    container_name: login-nginx
+    ports:
+      - 80:80
+    tty: true
