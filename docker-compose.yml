@@ -21,6 +21,15 @@ services:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: logintest
       MYSQL_PASSWORD: logintest
+  react:
+    image: node:15
+    container_name: login-react
+    ports:
+      - 3000:3000
+    volumes:
+      - ./client/react:/app
+    working_dir: /app
+    command: yarn start
   nginx:
     build:
       context: .
