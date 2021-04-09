@@ -9,12 +9,8 @@ const Top: React.FC = () => {
 
   return (
     <React.Fragment>
-      <h1 className="topTitle">
-        Login Smaple App
-      </h1>
-      <p className="topText">
-        あなたのIDは {userId} です！ 
-      </p>
+      <h1 className="topTitle">Login Smaple App</h1>
+      <p className="topText">あなたのIDは {userId} です！</p>
     </React.Fragment>
   )
 }

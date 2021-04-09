@@ -50,9 +50,7 @@ const Register: React.FC = () => {
               required: 'メールアドレスを入力してください',
             })}
           />
-          <p className="registerMsg">
-            {errors.email && errors.email.message}
-          </p>
+          <p className="registerMsg">{errors.email && errors.email.message}</p>
 
           <input
             type="password"
