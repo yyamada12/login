@@ -7,11 +7,7 @@ const Auth: React.FC = ({ children }): JSX.Element => {
   const { userId } = useUserContext()
   console.log(userId)
 
-  return (
-    <React.Fragment>
-      {userId ? children : <Redirect to={'/login'} />}
-    </React.Fragment>
-  )
+  return <>{userId ? children : <Redirect to="/login" />}</>
 }
 
 export default Auth

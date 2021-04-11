@@ -24,8 +24,8 @@ const Login: React.FC = () => {
   const onClick = () => {
     axios
       .post('/login', {
-        email: email,
-        password: password,
+        email,
+        password,
       })
       .then((res) => {
         setMsg(res.data.userId)
@@ -40,7 +40,7 @@ const Login: React.FC = () => {
   }
 
   return (
-    <React.Fragment>
+    <>
       <div className="loginMain">
         <h1 className="login">ログイン</h1>
 
@@ -87,7 +87,7 @@ const Login: React.FC = () => {
           </Link>
         </form>
       </div>
-    </React.Fragment>
+    </>
   )
 }
 

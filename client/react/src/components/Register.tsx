@@ -20,8 +20,8 @@ const Register: React.FC = () => {
   const onClick = () => {
     axios
       .post('/register', {
-        email: email,
-        password: password,
+        email,
+        password,
       })
       .then(() => {
         history.push('/login')
@@ -34,7 +34,7 @@ const Register: React.FC = () => {
   }
 
   return (
-    <React.Fragment>
+    <>
       <div className="registerMain">
         <h1 className="register">ユーザー登録</h1>
         <form className="registerForm" onSubmit={handleSubmit(onClick)}>
@@ -85,7 +85,7 @@ const Register: React.FC = () => {
           </Link>
         </form>
       </div>
-    </React.Fragment>
+    </>
   )
 }
 
